@@ -129,7 +129,7 @@ public:
     void sortByValue();
 
     std::pair<int, int> moveInInventory(const std::string& title = "EQUIPMENT", const std::string& actionHint = "Use 'WASD' to move, 'Space' to select, 'Q' to quit") const;
-    void displayEquipment(const std::string& title = "EQUIPMENT") const;
+    void displayEquipment(const std::string& title = "EQUIPMENT");
 
 private:
     int rows;

@@ -104,7 +104,11 @@ Leggings::Leggings(std::string name, std::string rarity, int value, int level, i
     : Armor(std::move(name), std::move(rarity), value, level, armor) {}
 
 Equipment::Equipment(int rows, int cols, int level)
-    : rows(rows), cols(cols), level(level), grid(rows, std::vector<std::unique_ptr<Item>>(cols, nullptr)) {}
+    : rows(rows), cols(cols), level(level), grid(rows) {
+    for (auto& rowItems : grid) {
+        rowItems.resize(cols);
+    }
+}
 
 int Equipment::getRows() const { return rows; }
 int Equipment::getCols() const { return cols; }
@@ -331,7 +335,7 @@ std::pair<int, int> Equipment::moveInInventory(const std::string& title, const s
     }
 }
 
-void Equipment::displayEquipment(const std::string& title) const {
+void Equipment::displayEquipment(const std::string& title) {
     bool running = true;
 
     while (running) {

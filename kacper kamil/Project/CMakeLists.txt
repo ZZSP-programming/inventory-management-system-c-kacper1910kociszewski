@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+option(INVENTORY_STRICT "Treat warnings as errors" OFF)
+
 add_library(inventory_core
     src/inventory.cpp
 )
@@ -15,6 +17,10 @@ target_include_directories(inventory_core
 )
 
 target_compile_options(inventory_core PRIVATE -Wall -Wextra -Wpedantic)
+
+if(INVENTORY_STRICT)
+    target_compile_options(inventory_core PRIVATE -Werror)
+endif()
 
 add_executable(inventory_app
     src/main.cpp
