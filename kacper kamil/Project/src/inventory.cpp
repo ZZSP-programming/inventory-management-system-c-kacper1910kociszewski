@@ -29,7 +29,10 @@ char readInputKey() {
     tcsetattr(STDIN_FILENO, TCSANOW, &newTermios);
 
     char ch = 0;
-    read(STDIN_FILENO, &ch, 1);
+    const ssize_t bytesRead = read(STDIN_FILENO, &ch, 1);
+    if (bytesRead != 1) {
+        ch = 0;
+    }
 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldTermios);
     return ch;
